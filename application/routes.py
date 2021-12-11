@@ -10,8 +10,11 @@ def index():
 def my_form_post():
     u_id = request.form['u_id']
     load_amount = request.form['load_amount']
+    confirmed_user_id = request.form['confirmed_user_id']
     user = db_ctrl.UserLoan()
     user.u_id = u_id
     user.load_amount = load_amount
-    user.getSingleUserIfValid()
-    return "Your request in process..."
+    user.confirmed_user_id = confirmed_user_id
+
+    if_valid = user.getSingleUserIfValid()
+    return if_valid

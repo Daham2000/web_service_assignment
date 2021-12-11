@@ -39,6 +39,13 @@ class UserLoan:
             save_balance = item[3]
         print(loan_balance)
         print(save_balance)
+        user_confirmer = cur.execute("SELECT * FROM users WHERE id LIKE '%s'" % self.confirmed_user_id)
+        user_confirmer_balance = 0
+        for u in user_confirmer:
+            user_confirmer_balance = u[3]
+        if(user_confirmer_balance>float(self.load_amount)):
+            print("You can get the load...")
         conItem.commit()
         conItem.close()
+        return "You can get the load..."
     
